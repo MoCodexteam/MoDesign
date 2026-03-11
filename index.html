@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Meta -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Professional Graphic Designer & UI/UX Portfolio Website" />
+
+  <!-- Title -->
+  <title>Graphic Designer | UI/UX Portfolio</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/style.css" />
+
+  <link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
+
+<style>
+  #services-3d {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100vh;
+    padding: 0 5%;
+    color: white;
+    font-family: sans-serif;
+    
+
+}
+
+.bg-shape1, 
+.bg-shape2, 
+.bg-shape3 {
+  filter: blur(110px);
+  opacity: 0.25;
+  pointer-events: none;
+  position: absolute;
+  border-radius: 50%;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+.bg-shape1 {
+  width: 420px;
+  height: 420px;
+  background: #a439ff;
+  top: -120px;
+  left: -120px;
+  animation-name: floatX;
+  animation-duration: 14s;
+}
+
+.bg-shape2 {
+  width: 320px;
+  height: 320px;
+  background: #00e0ff;
+  bottom: -80px;
+  right: -100px;
+  animation-name: floatXY;
+  animation-duration: 16s;
+}
+
+.bg-shape3 {
+  width: 500px;
+  height: 500px;
+  background: #ffc93c;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation-name: floatY;
+  animation-duration: 20s;
+}
+
+
+@keyframes floatX {
+  0% { transform: translateX(0) translateY(0); }
+  100% { transform: translateX(130px) translateY(0); }
+}
+
+@keyframes floatY {
+  0% { transform: translateY(0) translateX(0); }
+  100% { transform: translateY(130px) translateX(0); }
+}
+
+@keyframes floatXY {
+  0% { transform: translateX(0) translateY(0); }
+  100% { transform: translateX(130px) translateY(70px); }
+}
+
+  .scene {
+    width: 200px;
+    height: 200px;
+    perspective: 800px;
+  }
+
+  
+
+  .cube {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    transform-style: preserve-3d;
+    transition: transform 1s ease-in-out;
+    box-shadow: rgba(241, 139, 5, 0.594), ;
+  }
+
+.face {
+position: absolute;
+  width: 200px;
+  height: 200px;
+  background: linear-gradient(135deg, #8e44ad, #5e3370);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+  padding: 10px;
+  
+  /* Depth */
+  box-shadow: inset 0 0 20px rgba(241, 139, 5, 0.594),
+              inset 0 0 10px rgba(241, 139, 5, 0.594),
+              0 10px 20px rgba(241, 139, 5, 0.594),
+}
+
+/* لمعة على الوجه */
+.face::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.543), transparent 70%);
+  pointer-events: none;
+}
+
+
+  .front  { transform: rotateY(0deg) translateZ(100px); }
+  .back   { transform: rotateY(180deg) translateZ(100px); }
+  .right  { transform: rotateY(90deg) translateZ(100px); }
+  .left   { transform: rotateY(-90deg) translateZ(100px); }
+  .top    { transform: rotateX(90deg) translateZ(100px); }
+  .bottom { transform: rotateX(-90deg) translateZ(100px); }
+
+ .service-description {
+  width: 40%;
+  font-size: 1.2rem;
+  line-height: 1.5;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.service-description.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* حركة أنيقة للنص */
+@keyframes fadeSlide {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.service-description.animate {
+  animation: fadeSlide 0.6s ease forwards;
+}
+
+
+/* === Layered Animated Gradient Blobs === */
+.bg-shape {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  mix-blend-mode: screen;
+  opacity: 0.6;
+  animation: float-shape 20s infinite ease-in-out;
+  z-index: 0;
+  transition: transform 0.3s ease-out;
+}
+
+/* Front Layer - smaller and sharper */
+.bg-shape.front {
+  width: 250px;
+  height: 250px;
+  filter: blur(80px);
+  background: radial-gradient(circle at center, rgba(155, 89, 182, 0.7), rgba(142, 68, 173, 0.4));
+}
+
+/* Mid Layer - medium size */
+.bg-shape.mid {
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle at center, rgba(189, 16, 224, 0.5), rgba(94, 51, 112, 0.3));
+}
+
+/* Back Layer - large and soft */
+.bg-shape.back {
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle at center, rgba(155, 89, 182, 0.3), rgba(52, 31, 63, 0.2));
+}
+
+
+/* Different positions for each shape */
+.bg-shape:nth-child(1) { top: -80px; left: -80px; animation-delay: 0s; }
+.bg-shape:nth-child(2) { bottom: -100px; right: -120px; animation-delay: 6s; }
+.bg-shape:nth-child(3) { top: 40%; left: 60%; animation-delay: 12s; }
+
+
+
+/* Floating animation */
+@keyframes float-shape {
+  0%, 100% { transform: translateY(0) translateX(0) scale(1); }
+  50% { transform: translateY(-40px) translateX(20px) scale(1.1); }
+}
+
+/* === Noise Overlay for Texture === */
+
+.bg-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width:100%;
+  overflow: hidden;
+  z-index: 0;
+  border-radius: 20px;
+}
+
+.bg-shape {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.6;
+  animation: float 12s infinite ease-in-out alternate;
+}
+
+.shape1 {
+  width: 350px; height: 350px;
+  background: radial-gradient(circle, #ff7eb3, transparent 70%);
+  top: -50px; left: -80px;
+}
+
+.shape2 {
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, #00e0ff, transparent 70%);
+  bottom: -100px; right: -100px;
+}
+
+.shape3 {
+  width: 300px; height: 300px;
+  background: radial-gradient(circle, #f39c12, transparent 70%);
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@keyframes float {
+  0% { transform: translateY(0) translateX(0); }
+  100% { transform: translateY(40px) translateX(20px); }
+}
+
+#services {
+  position: relative;
+  height: 100vh; /* full viewport height */
+  width: 100%;   /* full width */
+  display: flex;
+  flex-direction: column;
+     /* center content horizontally */
+  padding: 60px; /* remove extra space */
+  overflow: hidden; /* hide anything spilling out */
+}
+
+</style>
+
+</head>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="container header-container">
+      <div class="logo"><img src="assets/images/designer.png"></div>
+      <nav class="main-nav">
+        <a href="#home" style="color: #f39c12;">Home</a>
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#portfolio">Portfolio</a>
+        <a href="#testimonials">Testimonials</a>
+        <a href="#contact" class="btn btn-small">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+<section id="home" class="hero">
+  <div class="bg-shape bg-shape1"></div>
+  <div class="bg-shape bg-shape2"></div>
+  <div class="bg-shape bg-shape3"></div>
+
+  <div class="hero-content container">
+    <div class="carousel-container">
+      <div class="carousel">
+        <img src="assets/images/ps-removebg-preview.png" alt="Adobe Photoshop" />
+        <img src="assets/images/pr-removebg-preview.png" alt="Adobe Premiere" />
+        <img src="assets/images/ae-removebg-preview.png" alt="Adobe After Effects" />
+        <img src="assets/images/ai-removebg-preview.png" alt="Adobe Illustrator" />
+        <img src="assets/images/cup_cat-removebg-preview.png" alt="Creative Asset" />
+        <img src="assets/images/figma-removebg-preview.png" alt="Figma" />
+      </div>
+    </div>
+
+    <div class="hero-text">
+      <h1>Welcome to Our Creative Space</h1>
+      <p>We bring your ideas to life with Adobe tools and stunning design expertise.</p>
+      <a href="#services" class="btn btn-primary">Explore Services</a>
+    </div>
+  </div>
+</section>
+  <!-- ABOUT -->
+
+  <section id="about" class="about section container">
+  <h2 class="section-title">About Me</h2>
+
+  <div class="about-content">
+    
+    <!-- صورة داخل دائرة مشعة -->
+    <div class="about-image">
+      <img src="assets/images/download.jpg" alt="About Me">
+    </div>
+
+    <div class="about-text">
+      <p class="section-desc">
+        I am a passionate Graphic Designer & UI/UX specialist with a keen eye for detail and a relentless drive to bring ideas to life through stunning visuals and intuitive designs.  
+        With over <strong>5 years</strong> of experience in creating compelling brand identities, digital artwork, and interactive experiences, I blend creativity with functionality to deliver designs that resonate and inspire.  
+      </p>
+
+      <ul class="about-skills">
+        <li>Expertise in Adobe Creative Suite (Photoshop, Illustrator, After Effects)</li>
+        <li>UI/UX design focused on user-centric and responsive experiences</li>
+        <li>Strong foundation in typography, color theory, and branding</li>
+        <li>Collaborative approach, turning client visions into reality</li>
+        <li>Continuous learner, always adapting to design trends & tech</li>
+      </ul>
+
+      <p class="section-desc" style="margin-top: 2rem;">
+        Whether it’s crafting a memorable logo, designing sleek interfaces, or creating motion graphics that tell a story, my goal is to transform your concepts into visual masterpieces that captivate your audience and elevate your brand.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section id="services" class="section services container">
+  <h2 class="section-title">Services</h2>
+  <p class="section-desc">
+    A curated set of creative services designed to elevate brands, products and digital experiences.
+  </p>
+
+  <div class="bg-container">
+    <div class="bg-shape shape1"></div>
+    <div class="bg-shape shape2"></div>
+    <div class="bg-shape shape3"></div>
+    <canvas id="bg-particles"></canvas>
+  </div>
+
+  <div id="services-3d" class="services-3d">
+    <div class="scene">
+      <div class="cube" id="cube">
+        <div class="face front">Logo Design</div>
+        <div class="face back">UI/UX Design</div>
+        <div class="face right">Brand Identity</div>
+        <div class="face left">Motion Graphics</div>
+        <div class="face top">Web Development</div>
+        <div class="face bottom">Content Strategy</div>
+      </div>
+    </div>
+    <div class="service-description" id="service-description">
+      Memorable, timeless logos that define your brand’s identity.
+    </div>
+  </div>
+</section>
+
+<section id="portfolio" class="section projects">
+  <h2 class="section-title">Projects</h2>
+  <p class="section-desc">Selected works that showcase creativity, precision, and vision.</p>
+
+  <div class="projects-grid">
+    <div class="project-card">
+      <img src="assets/images/e9d31dd0-b1fa-405d-b20c-511589818a60.jpg" alt="Project 1">
+      <div class="project-overlay">
+        <h3>Brand Identity for Luxe</h3>
+        <span>Branding</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <img src="assets/images/Just had a BIG IDEA 💡!   Sometimes all it takes….jpg" alt="Project 2">
+      <div class="project-overlay">
+        <h3>UI/UX for Mobile Banking</h3>
+        <span>UI/UX Design</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <img src="assets/images/T Shirt Layout, Tshirt Poster, Streetwear T Shirt….jpg" alt="Project 3">
+      <div class="project-overlay">
+        <h3>Motion Graphics for Campaign</h3>
+        <span>Animation</span>
+      </div>
+    </div>
+
+     <div class="project-card">
+      <img src="assets/images/399a58d0-40a0-4761-af83-2cff94b8a68b.jpg" alt="Project 3">
+      <div class="project-overlay">
+        <h3>Motion Graphics for Campaign</h3>
+        <span>Animation</span>
+      </div>
+    </div>
+
+     <div class="project-card">
+      <img src="assets/images/Need a custom poster or graphic design that stands….jpg" alt="Project 3">
+      <div class="project-overlay">
+        <h3>Motion Graphics for Campaign</h3>
+        <span>Animation</span>
+      </div>
+    </div>
+
+     <div class="project-card">
+      <img src="assets/images/bc9070d9-5f29-452f-a8ac-7b71500a1332.jpg" alt="Project 3">
+      <div class="project-overlay">
+        <h3>Motion Graphics for Campaign</h3>
+        <span>Animation</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="testimonials" class="testimonials">
+  <h2 class="section-title">What Our Clients Say</h2>
+  <p class="section-desc">Genuine feedback from partners and brands we’ve had the honor to work with.</p>
+
+  <div class="testimonials-wrapper">
+    <div class="testimonial-card">
+      <img src="client1.jpg" alt="Sarah Johnson" class="client-img">
+      <h3>Sarah Johnson</h3>
+      <span class="client-role">Creative Director, PixelCraft</span>
+      <div class="stars">★★★★★</div>
+      <p class="quote">"They transformed our vision into reality with unmatched creativity and dedication."</p>
+    </div>
+
+    <div class="testimonial-card">
+      <img src="client2.jpg" alt="Ahmed Al-Mutairi" class="client-img">
+      <h3>Ahmed Al-Mutairi</h3>
+      <span class="client-role">CEO, TechSphere</span>
+      <div class="stars">★★★★★</div>
+      <p class="quote">"Professional, fast, and reliable. Our brand has never looked better."</p>
+    </div>
+
+    <div class="testimonial-card">
+      <img src="client3.jpg" alt="Emily Carter" class="client-img">
+      <h3>Emily Carter</h3>
+      <span class="client-role">Marketing Manager, BrightPath</span>
+      <div class="stars">★★★★☆</div>
+      <p class="quote">"Smooth communication and outstanding results. Highly recommended!"</p>
+    </div>
+  </div>
+</section>
+<section id="contact" class="contact-section">
+  <div class="contact-info">
+    <h2>Let’s Build Something Great</h2>
+    <p>From concept to launch, we transform your ideas into experiences. Let’s start the conversation.</p>
+
+    <div class="contact-details">
+      <div>
+        <i class="ri-mail-fill"></i>
+        hello@yourbrand.com
+      </div>
+      <div>
+        <i class="ri-phone-fill"></i>
+        +1 (234) 567-890
+      </div>
+      <div>
+        <i class="ri-map-pin-fill"></i>
+        123 Creative Street, NY, USA
+      </div>
+    </div>
+
+    <div class="social-links">
+      <a href="#"><i class="ri-behance-fill"></i></a>
+      <a href="#"><i class="ri-dribbble-fill"></i></a>
+      <a href="#"><i class="ri-linkedin-fill"></i></a>
+      <a href="#"><i class="ri-instagram-fill"></i></a>
+    </div>
+  </div>
+
+  <div class="contact-form">
+    <form>
+      <div class="form-group">
+        <input type="text" required>
+        <label>Name</label>
+      </div>
+      <div class="form-group">
+        <input type="email" required>
+        <label>Email</label>
+      </div>
+      <div class="form-group">
+        <textarea required></textarea>
+        <label>Message</label>
+      </div>
+      <button type="submit" class="btn-submit">Send Message</button>
+    </form>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-container">
+
+    <!-- Branding -->
+    <div class="footer-brand">
+      <div class="footer-image">
+        <img src="assets/images/designer.png">
+      </div>
+      <p>We craft digital experiences that inspire and engage.</p>
+    </div>
+
+    <!-- Fast Links -->
+    <div class="footer-links">
+      <h3>Quick Links</h3>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+
+    <!-- Contact Info -->
+    <div class="footer-contact">
+      <h3>Contact</h3>
+      <p><i class="ri-map-pin-fill"></i> 123 Creative Street, NY, USA</p>
+      <p><i class="ri-phone-fill"></i> +1 (234) 567-890</p>
+      <p><i class="ri-mail-fill"></i> hello@yourbrand.com</p>
+    </div>
+
+    <!-- Social Media -->
+    <div class="footer-social">
+      <h3>Follow Us</h3>
+      <div class="social-icons">
+        <a href="#"><i class="ri-facebook-fill"></i></a>
+        <a href="#"><i class="ri-instagram-fill"></i></a>
+        <a href="#"><i class="ri-twitter-fill"></i></a>
+        <a href="#"><i class="ri-linkedin-fill"></i></a>
+        <a href="#"><i class="ri-youtube-fill"></i></a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    <p>&copy; 2025 Design. All rights reserved.</p>
+  </div>
+</footer>
+
+
+  
+  <!-- Scripts -->
+  <!-- JS Libraries -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r152/three.min.js"></script>
+
+  <script src="js/app.js"></script>
+  <script src="js/carousel.js"></script>
+
+<script>
+  const cube = document.getElementById('cube');
+  const descriptionEl = document.getElementById('service-description');
+
+  const faces = [
+    { rotation: 'rotateX(0deg) rotateY(0deg)', desc: "Memorable, timeless logos that define your brand’s identity." }, // Front
+    { rotation: 'rotateX(0deg) rotateY(-90deg)', desc: "Intuitive and engaging designs for web and mobile applications." }, // Right
+    { rotation: 'rotateX(0deg) rotateY(-180deg)', desc: "Complete visual systems including color palettes, typography, and brand guidelines." }, // Back
+    { rotation: 'rotateX(0deg) rotateY(90deg)', desc: "Dynamic animations that bring your brand to life and captivate audiences." }, // Left
+    { rotation: 'rotateX(-90deg) rotateY(0deg)', desc: "Responsive and high-performance websites tailored to your business needs." }, // Top
+    { rotation: 'rotateX(90deg) rotateY(0deg)', desc: "Crafting impactful messaging that resonates and converts." } // Bottom
+  ];
+
+  let current = 0;
+
+  function updateDescription(text) {
+  const desc = document.querySelector('.service-description');
+  desc.classList.remove('show', 'animate');
+  setTimeout(() => {
+    desc.textContent = text;
+    desc.classList.add('show', 'animate');
+  }, 300); // وقت صغير قبل عرض النص الجديد
+}
+
+
+  function showFace(index) {
+    cube.style.transform = faces[index].rotation;
+    descriptionEl.style.opacity = 0;
+
+    setTimeout(() => {
+      descriptionEl.textContent = faces[index].desc;
+      descriptionEl.style.opacity = 1;
+    }, 500);
+  }
+
+  function nextFace() {
+    current = (current + 1) % faces.length;
+    showFace(current);
+  }
+
+  // Start animation loop
+  showFace(current);
+  setInterval(nextFace, 3000); // 2s pause + 1s rotation
+</script>
+
+<script>
+  const shapes = document.querySelectorAll('.bg-shape');
+
+  document.addEventListener('mousemove', (e) => {
+    const { innerWidth, innerHeight } = window;
+    const x = (e.clientX / innerWidth - 0.5) * 2; // -1 to 1
+    const y = (e.clientY / innerHeight - 0.5) * 2; // -1 to 1
+
+    shapes.forEach((shape, i) => {
+      const depth = (i + 1) * 20; // each layer moves differently
+      shape.style.transform = `translate(${x * depth}px, ${y * depth}px)`;
+    });
+  });
+
+
+  document.addEventListener('mousemove', (e) => {
+    const { innerWidth, innerHeight } = window;
+    const x = (e.clientX / innerWidth - 0.5) * 2;
+    const y = (e.clientY / innerHeight - 0.5) * 2;
+
+    shapes.forEach((shape, i) => {
+      const depth = (i + 1) * 30;
+      shape.style.transform = `translate(${x * depth}px, ${y * depth}px)`;
+    });
+  });
+
+  // Particle sparkle effect
+  const canvas = document.getElementById("bg-particles");
+  const ctx = canvas.getContext("2d");
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+  let particles = Array.from({length: 50}, () => ({
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    r: Math.random() * 2 + 1,
+    dx: (Math.random() - 0.5) * 0.5,
+    dy: (Math.random() - 0.5) * 0.5
+  }));
+
+  function drawParticles() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    particles.forEach(p => {
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = "rgba(255,255,255,0.8)";
+      ctx.fill();
+      p.x += p.dx;
+      p.y += p.dy;
+      if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
+      if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
+    });
+    requestAnimationFrame(drawParticles);
+  }
+  drawParticles();
+</script>
+
+
+
+</body>
+</html>
